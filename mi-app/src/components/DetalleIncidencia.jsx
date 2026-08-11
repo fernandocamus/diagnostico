@@ -5,36 +5,36 @@ import { api } from '../api/cliente'
 import { etiquetaDe, fechaLarga } from '../formato'
 
 export default function DetalleIncidencia({ id, catalogos, onCerrar }) {
-    const [detalle, setDetalle] = useState(null)
-    const [cargando, setCargando] = useState(true)
-    const [error, setError] = useState(null)
+  const [detalle, setDetalle] = useState(null)
+  const [cargando, setCargando] = useState(true)
+  const [error, setError] = useState(null)
 
-    useEffect(() => {
-        let vigente = true
-        setCargando(true)
-        setError(null)
+  useEffect(() => {
+    let vigente = true
+    setCargando(true)
+    setError(null)
 
-        api
-        .detalle(id)
-        .then((datos) => {
-            if (vigente) setDetalle(datos)
-        })
-        .catch((problema) => {
-            if (vigente) setError(problema.mensaje || 'No fue posible cargar la incidencia.')
-        })
-        .finally(() => {
-            if (vigente) setCargando(false)
-        })
+    api
+      .detalle(id)
+      .then((datos) => {
+        if (vigente) setDetalle(datos)
+      })
+      .catch((problema) => {
+        if (vigente) setError(problema.mensaje || 'No fue posible cargar la incidencia.')
+      })
+      .finally(() => {
+        if (vigente) setCargando(false)
+      })
 
-        return () => {
-        vigente = false
-        }
-    }, [id])
+    return () => {
+      vigente = false
+    }
+  }, [id])
 
-    const incidencia = detalle?.incidencia
-    const nivelPrioridad = (catalogos?.prioridades || []).find(
-        (opcion) => opcion.codigo === incidencia?.prioridad
-    )?.nivel
+  const incidencia = detalle?.incidencia
+  const nivelPrioridad = (catalogos?.prioridades || []).find(
+    (opcion) => opcion.codigo === incidencia?.prioridad
+  )?.nivel
 
   return (
     <Modal titulo={`Incidencia #${id}`} onCerrar={onCerrar} ancho="ancho">
