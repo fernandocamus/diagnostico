@@ -5,9 +5,9 @@ Registro y seguimiento de incidencias técnicas.
 ## Integrantes
 
 - Juan Carlos Tapia
-- fernandocamus
-- fr.garaym@duocuc.cl
-- Deymon2105
+- Fernando Camus
+- Franco Garay
+- Deymon Gonzalez
 
 ## Problema que resuelve
 
